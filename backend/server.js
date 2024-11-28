@@ -17,29 +17,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.get("/convert", async (req, res) => {
-//   const { base, symbols } = req.query;
-//   try {
-//     const response = await axios.get(`https://api.currencyapi.com/v3/latest`, {
-//       params: {
-//         apikey: process.env.API_KEY,
-//         base_currency: base,
-//         currencies: symbols,
-//       },
-//     });
-//     res.json(response.data);
-//   } catch (error) {
-//     res.status(500).json({ message: "Error fetching data", error });
-//   }
-// });
-
-
 app.get('/convert', async (req, res) => {
     const { base_currency, currencies } = req.query;
     console.log(base_currency, currencies)
   
     try {
-      // Build the API URL
       const url = `https://api.freecurrencyapi.com/v1/latest?apikey=${process.env.API_KEY}&base_currency=${base_currency}&currencies=${currencies}`;
       
       // Fetch data from the currency API

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import History from "./components/History";
 import "./App.css";
 import axios from "axios";
-import usaFlag from "./assets/usa.png";
 import { currencies } from "./currencies";
 
 const App = () => {
@@ -10,42 +8,6 @@ const App = () => {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState("");
   const [conversionHistory, setConversionHistory] = useState([]);
-
-  // const currencies = [
-  //   { code: "EUR", name: "Euro" },
-  //   { code: "USD", name: "US Dollar" },
-  //   { code: "JPY", name: "Japanese Yen" },
-  //   { code: "BGN", name: "Bulgarian Lev" },
-  //   { code: "CZK", name: "Czech Republic Koruna" },
-  //   { code: "DKK", name: "Danish Krone" },
-  //   { code: "GBP", name: "British Pound Sterling" },
-  //   { code: "HUF", name: "Hungarian Forint" },
-  //   { code: "PLN", name: "Polish Zloty" },
-  //   { code: "RON", name: "Romanian Leu" },
-  //   { code: "SEK", name: "Swedish Krona" },
-  //   { code: "CHF", name: "Swiss Franc" },
-  //   { code: "ISK", name: "Icelandic Króna" },
-  //   { code: "NOK", name: "Norwegian Krone" },
-  //   { code: "HRK", name: "Croatian Kuna" },
-  //   { code: "RUB", name: "Russian Ruble" },
-  //   { code: "TRY", name: "Turkish Lira" },
-  //   { code: "AUD", name: "Australian Dollar" },
-  //   { code: "BRL", name: "Brazilian Real" },
-  //   { code: "CAD", name: "Canadian Dollar" },
-  //   { code: "CNY", name: "Chinese Yuan" },
-  //   { code: "HKD", name: "Hong Kong Dollar" },
-  //   { code: "IDR", name: "Indonesian Rupiah" },
-  //   { code: "ILS", name: "Israeli New Sheqel" },
-  //   { code: "INR", name: "Indian Rupee" },
-  //   { code: "KRW", name: "South Korean Won" },
-  //   { code: "MXN", name: "Mexican Peso" },
-  //   { code: "MYR", name: "Malaysian Ringgit" },
-  //   { code: "NZD", name: "New Zealand Dollar" },
-  //   { code: "PHP", name: "Philippine Peso" },
-  //   { code: "SGD", name: "Singapore Dollar" },
-  //   { code: "THB", name: "Thai Baht" },
-  //   { code: "ZAR", name: "South African Rand" },
-  // ];
 
   // Load conversion history from localStorage
   useEffect(() => {
@@ -161,38 +123,39 @@ const App = () => {
         </div>
         <div className="px-1 h-[400px]">
           <ul className="px-1">
-            {conversionHistory.length > 0 ? (conversionHistory.map((entry, index) => (
-              <li
-                key={index}
-                className="text-gray-700 mb-4 flex items-center justify-between"
-              >
-                <div className="flex items-center gap-5">
-                  <img
-                    src={`https://flagcdn.com/w40/${entry.flag}.png`}
-                    alt="Country Flag"
-                    className="w-11 h-11"
-                  />{" "}
-                  <p className="flex flex-col gap-1 text-gray-500 font-medium">
-                    <span className="text-xl font-semibold text-black">
-                      {entry.symbol} {entry.result}
-                    </span>
-                    <span>
-                      {entry.code} - {entry.countryName}
-                    </span>
-                  </p>
-                </div>
-                <span className="text-gray-500 font-bold text-xl hover:cursor-pointer" onClick={() => deleteHistoryItem(index)}>
-                  x
-                </span>
-                {/* <button
-                  onClick={() => deleteHistoryItem(index)}
-                  className="ml-4 bg-red-500 text-white px-3 py-1 rounded"
+            {conversionHistory.length > 0 ? (
+              conversionHistory.map((entry, index) => (
+                <li
+                  key={index}
+                  className="text-gray-700 mb-4 flex items-center justify-between"
                 >
-                  Delete
-                </button> */}
-              </li>
-            ))) : (
-              <p className="text-lg text-gray-500 font-semibold">Conversion history is empty.</p>
+                  <div className="flex items-center gap-5">
+                    <img
+                      src={`https://flagcdn.com/w40/${entry.flag}.png`}
+                      alt="Country Flag"
+                      className="w-11 h-11"
+                    />{" "}
+                    <p className="flex flex-col gap-1 text-gray-500 font-medium">
+                      <span className="text-xl font-semibold text-black">
+                        {entry.symbol} {entry.result}
+                      </span>
+                      <span>
+                        {entry.code} - {entry.countryName}
+                      </span>
+                    </p>
+                  </div>
+                  <span
+                    className="text-gray-500 font-bold text-xl hover:cursor-pointer"
+                    onClick={() => deleteHistoryItem(index)}
+                  >
+                    x
+                  </span>
+                </li>
+              ))
+            ) : (
+              <p className="text-lg text-gray-500 font-semibold">
+                Conversion history is empty.
+              </p>
             )}
           </ul>
         </div>
